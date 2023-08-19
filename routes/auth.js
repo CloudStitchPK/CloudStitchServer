@@ -6,7 +6,7 @@ const auth = require("../middlewares/auth");
 const nodemailer = require('nodemailer');
 
 const accountSid = "AC6f57b1f6502012793a710038d7286e07";
-const authToken = "5d68810c51e9ea3bb2afe27d771647de";
+const authToken = "d07543d726ade47d0caf6ffd7bce6808";
 const verifySid = "VAceb7c992e506214b45cf3043293d4fb2";
 const client = require("twilio")(accountSid, authToken);
 
