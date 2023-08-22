@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const { productSchema } = require("./product");
+const { measurementSchema } = require("./measurement");
 
 const orderSchema = mongoose.Schema({
   products: [
     {
       product: productSchema,
+      measurement: measurementSchema,
       quantity: {
         type: Number,
         required: true,
@@ -26,11 +28,12 @@ const orderSchema = mongoose.Schema({
         required: true,
         trim: true,
       },
-      image: 
+      images: [
         {
           type: String,
           required: true,
         },
+      ],
     },
   ],
   totalPrice: {
@@ -38,8 +41,26 @@ const orderSchema = mongoose.Schema({
     required: true,
   },
   address: {
-    type: String,
-    required: true,
+    addressLabel: {
+      type: String,
+      required: true,
+     
+    },
+    addressData: {
+      type: String,
+      required: true,
+      
+    },
+  },
+  payment: {
+    paymentLabel: {
+      type: String,
+      required: true,
+    },
+    paymentData: {
+      type: String,
+      required: true,
+    },
   },
   userId: {
     required: true,

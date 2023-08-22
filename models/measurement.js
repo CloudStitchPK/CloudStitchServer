@@ -36,4 +36,4 @@ const measurementSchema = mongoose.Schema({
 });
 
 const Measurement = mongoose.model("Measurement", measurementSchema);
-module.exports = Measurement;
+module.exports = { Measurement , measurementSchema };

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const { productSchema } = require("./product")
+const { productSchema } = require("./product");
+const { measurementSchema } = require("./measurement");
 
 const userSchema = mongoose.Schema({
   name: {
@@ -32,10 +33,34 @@ const userSchema = mongoose.Schema({
     //    message: "Please enter a valid phone number",
     //  },
   },
-  address: {
-    type: String,
-    default: "",
-  },
+  address: [
+    {
+      addressLabel: {
+        type: String,
+        required: true,
+        default: ''
+      },
+      addressData: {
+        type: String,
+        required: true,
+        default: ''
+      },
+    },
+  ],
+  payment: [
+    {
+      paymentLabel: {
+        type: String,
+        required: true,
+        default: ''
+      },
+      paymentData: {
+        type: String,
+        required: true,
+        default: ''
+      },
+    },
+  ],
   type: {
     type: String,
     default: "user",
@@ -43,10 +68,36 @@ const userSchema = mongoose.Schema({
   cart: [
     {
       product: productSchema,
+      profileData: measurementSchema,
       quantity: {
         type: Number,
         required: true,
       },
+      neckStyle: {
+        type: String,
+        required: true,
+      },
+      sleeveStyle: {
+        type: String,
+        required: true,
+      },
+      trouserLength: {
+        type: String,
+        required: true,
+      },
+      instructions: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      images: [
+        {
+          type: String,
+          required: true,
+        },
+      ]
+
+      
     },
   ],
 });
