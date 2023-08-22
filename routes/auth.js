@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middlewares/auth");
 const nodemailer = require('nodemailer');
 
-const accountSid = "AC6f57b1f6502012793a710038d7286e07";
-const authToken = "d07543d726ade47d0caf6ffd7bce6808";
-const verifySid = "VAceb7c992e506214b45cf3043293d4fb2";
+const accountSid = process.env.ACCOUNT_SID;
+const authToken = process.env.AUTH_TOKEN;
+const verifySid = process.env.VERIFY_SID;
 const client = require("twilio")(accountSid, authToken);
 
 // SIGN UP  
@@ -67,7 +67,7 @@ authRouter.post("/api/signup", async (req, res) => {
           .json({ msg: "User with this phone does not exist!" });
       }
 
-      client.verify
+      client.verify.v2
       .services(verifySid)
       .verifications.create({ to: phone, channel: 'sms' })
       .then((verification) => {
@@ -75,7 +75,7 @@ authRouter.post("/api/signup", async (req, res) => {
         res.status(200).json({ msg: 'Verification code sent successfully.' });
       })
       .catch((error) => {
-        console.error('Error sending verification code:', error);
+        console.log('Error sending verification code:', error);
         res.status(500).json({ error: 'Failed to send verification code.' });
       });
   
