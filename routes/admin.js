@@ -49,7 +49,7 @@ adminRouter.delete("/admin/update-product", admin, async (req, res) => {
     const { id, name, images, quantity, price, category} = req.body;
     let product = await Product.findById(id);
     product.name = name;
-    if (images.length() > 0){
+    if (images.length > 0){
       product.images = images;
     }
     
