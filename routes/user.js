@@ -124,7 +124,7 @@ userRouter.post("/api/save-user-address", auth, async (req, res) => {
 // order product
 userRouter.post("/api/order", auth, async (req, res) => {
   try {
-    const { cart, totalPrice, addressLabel, paymentLabel } = req.body;
+    const { cart, totalPrice, addressLabel, paymentLabel, isQuick } = req.body;
     let products = [];
     let user = await User.findById(req.user);
 
@@ -164,6 +164,7 @@ userRouter.post("/api/order", auth, async (req, res) => {
     let order = new Order({
       products,
       totalPrice,
+      isQuick,
       address: selectedAddress,
       payment: selectedPayment,
       userId: req.user,

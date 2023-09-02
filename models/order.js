@@ -40,6 +40,10 @@ const orderSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  isQuick: {
+    type: Boolean,
+    required: true,
+  },
   address: {
     addressLabel: {
       type: String,
