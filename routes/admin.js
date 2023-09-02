@@ -44,6 +44,26 @@ adminRouter.post("/admin/delete-product", admin, async (req, res) => {
   }
 });
 
+adminRouter.delete("/admin/update-product", admin, async (req, res) => {
+  try {
+    const { id, name, images, quantity, price, category} = req.body;
+    let product = await Product.findById(id);
+    product.name = name;
+    if (images != []){
+      product.images = images;
+    }
+    
+    product.quantity = quantity;
+    product.price = price;
+    product.category = category;
+
+    product = await product.save();
+    res.json(product);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 adminRouter.get("/admin/get-orders", admin, async (req, res) => {
   try {
     const orders = await Order.find({});
